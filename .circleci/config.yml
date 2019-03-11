@@ -20,8 +20,11 @@ jobs:
         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
         command: sudo chmod +x ./gradlew
     - run:
+        name: Download license
+        command: yes | sdkmanager --licenses && yes | sdkmanager --update
+    - run:
         name: Download Dependencies
-        command: ./gradlew androidDependencies
+        command: ./gradlew androidDependencies     
     - run:
         name: Setup emulator
         command: sdkmanager "system-images;android-24;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-24;default;armeabi-v7a"
